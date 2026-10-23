@@ -1,0 +1,495 @@
+<title>Паспорт — брендбук цифрового продукта</title>
+<style>
+/*FONTS: unbounded,onest,jetbrains-mono*/
+
+:root{
+  --bg:#F7F8F8; --surf:#FFFFFF; --surf-2:#EEF1F1; --line:#DFE4E5; --line-2:#EAEDEE;
+  --tx:#131A1D; --tx-2:#454F53; --tx-3:#6C767C;
+  --sig:#131A1D;                      /* «свет» — фирменная величина, инвертируется по теме */
+  --ch-mel:#B08D2C; --ch-hem:#C2456F; --ch-hyd:#2E9FBA;
+  --good:#2E7D5B; --warn:#9A6B12; --crit:#A83A32;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0D1014; --surf:#161B20; --surf-2:#1D2429; --line:#242B31; --line-2:#1E252A;
+    --tx:#E8EDEF; --tx-2:#B3BDC1; --tx-3:#879199;
+    --sig:#E8EDEF;
+    --good:#5FBF92; --warn:#D9A441; --crit:#E3776E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1014; --surf:#161B20; --surf-2:#1D2429; --line:#242B31; --line-2:#1E252A;
+  --tx:#E8EDEF; --tx-2:#B3BDC1; --tx-3:#879199; --sig:#E8EDEF;
+  --good:#5FBF92; --warn:#D9A441; --crit:#E3776E;
+}
+:root[data-theme="light"]{
+  --bg:#F7F8F8; --surf:#FFFFFF; --surf-2:#EEF1F1; --line:#DFE4E5; --line-2:#EAEDEE;
+  --tx:#131A1D; --tx-2:#454F53; --tx-3:#6C767C; --sig:#131A1D;
+  --good:#2E7D5B; --warn:#9A6B12; --crit:#A83A32;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--tx);
+  font-family:Onest,system-ui,sans-serif; font-size:16.5px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px 100px}
+.col{max-width:62ch}
+p{margin:0}
+h1,h2,h3,h4{margin:0; text-wrap:balance}
+h1{font-family:Unbounded,system-ui,sans-serif; font-weight:700; font-size:clamp(34px,6vw,68px); line-height:1.02; letter-spacing:-.03em}
+h2{font-family:Unbounded,system-ui,sans-serif; font-weight:600; font-size:clamp(22px,3vw,31px); line-height:1.2; letter-spacing:-.02em}
+h3{font-size:18px; font-weight:700; line-height:1.35}
+h4{font-size:14px; font-weight:700}
+.body{color:var(--tx-2)}
+.small{font-size:14px; line-height:1.58; color:var(--tx-2)}
+.tiny{font-size:12.5px; line-height:1.5; color:var(--tx-3)}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums}
+code{font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.85em}
+
+.tag{font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--tx-3)}
+.stack{display:flex; flex-direction:column}
+.g8{gap:8px} .g12{gap:12px} .g16{gap:16px} .g24{gap:24px} .g32{gap:32px}
+
+.cover{padding:80px 0 56px; display:flex; flex-direction:column; gap:34px}
+.hair{height:1px; background:var(--line)}
+
+section{padding:60px 0; border-top:1px solid var(--line)}
+.sec-head{display:grid; gap:14px; margin-bottom:34px}
+@media(min-width:840px){.sec-head{grid-template-columns:64px 1fr; gap:14px 28px; align-items:start}}
+.sec-n{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--tx-3); padding-top:12px; letter-spacing:.08em}
+
+.panel{background:var(--surf); border:1px solid var(--line-2); border-radius:4px; padding:24px}
+.grid2{display:grid; gap:16px} @media(min-width:780px){.grid2{grid-template-columns:1fr 1fr}}
+.grid3{display:grid; gap:16px} @media(min-width:860px){.grid3{grid-template-columns:repeat(3,1fr)}}
+
+/* знак */
+.stage{background:var(--surf); border:1px solid var(--line-2); border-radius:4px; padding:44px; display:grid; place-items:center; min-height:180px}
+.mk{display:flex; align-items:center; gap:14px}
+.mk .nm{font-family:Unbounded,sans-serif; font-weight:700; font-size:26px; letter-spacing:-.02em}
+.mk .sub{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--tx-3); display:block; font-weight:400}
+
+/* палитра */
+.pal{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(158px,1fr))}
+.chip{border:1px solid var(--line-2); border-radius:4px; overflow:hidden; background:var(--surf)}
+.chip i{display:block; height:96px}
+.chip .meta{padding:12px 14px; display:flex; flex-direction:column; gap:3px}
+.chip .nm{font-size:14px; font-weight:700}
+.chip .hx{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--tx-3)}
+.chip .use{font-size:12px; color:var(--tx-2); line-height:1.45}
+
+/* приборные плитки */
+.tiles{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.tile{background:var(--surf); border:1px solid var(--line-2); border-radius:4px; padding:18px 20px; display:flex; flex-direction:column; gap:11px}
+.tile .lab{display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600}
+.tile .lab i{width:9px; height:9px; border-radius:2px; flex:none}
+.tile .v{font-family:Unbounded,sans-serif; font-weight:600; font-size:30px; line-height:1; font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+.tile .track{height:5px; background:var(--surf-2); border-radius:3px; overflow:hidden}
+.tile .track i{display:block; height:100%; border-radius:3px}
+.tile .note{font-size:12px; color:var(--tx-3); line-height:1.4}
+
+.tw{overflow-x:auto; border:1px solid var(--line-2); border-radius:4px; background:var(--surf)}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:520px}
+th,td{padding:10px 14px; text-align:left; border-bottom:1px solid var(--line-2); vertical-align:top}
+th{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--tx-3); font-weight:500; background:var(--surf-2)}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums; white-space:nowrap; font-family:'JetBrains Mono',monospace; font-size:13px}
+.pass{color:var(--good); font-weight:700} .fail{color:var(--crit); font-weight:700}
+
+/* экраны */
+.screen{border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--surf)}
+.screen .top{display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line-2); background:var(--surf-2)}
+.screen .top .t{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--tx-3)}
+.screen .in{padding:20px; display:flex; flex-direction:column; gap:16px}
+.zone-row{display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:11px 0; border-bottom:1px solid var(--line-2)}
+.zone-row:last-child{border-bottom:0}
+.zone-row .z{font-size:14.5px; font-weight:500}
+.zone-row .z small{display:block; color:var(--tx-3); font-size:12px; font-weight:400}
+.pill{font-family:'JetBrains Mono',monospace; font-size:11px; padding:4px 9px; border-radius:3px; border:1px solid var(--line); color:var(--tx-2); white-space:nowrap}
+.pill.b{border-color:var(--good); color:var(--good)}
+.pill.w{border-color:var(--warn); color:var(--warn)}
+.btn{align-self:flex-start; background:var(--sig); color:var(--bg); border-radius:4px; padding:11px 20px; font-size:14px; font-weight:700}
+.field{display:flex; flex-direction:column; gap:6px}
+.field .l{font-size:12px; color:var(--tx-3); font-weight:500}
+.field .b{border:1px solid var(--line); border-radius:4px; padding:11px 13px; font-size:14.5px; color:var(--tx-2); background:var(--bg)}
+.chips{display:flex; flex-wrap:wrap; gap:7px}
+.chips span{border:1px solid var(--line); border-radius:20px; padding:6px 13px; font-size:13px; color:var(--tx-2)}
+.chips span.on{border-color:var(--sig); color:var(--sig); font-weight:600}
+
+.note{border-left:2px solid var(--sig); background:var(--surf); padding:18px 20px; border-radius:0 4px 4px 0; display:flex; flex-direction:column; gap:8px; border-top:1px solid var(--line-2); border-right:1px solid var(--line-2); border-bottom:1px solid var(--line-2)}
+.note .t{font-weight:700; font-size:14.5px}
+.note.crit{border-left-color:var(--crit)}
+.note.crit .t{color:var(--crit)}
+
+.dn{display:grid; gap:16px} @media(min-width:780px){.dn{grid-template-columns:1fr 1fr}}
+.dn > div{border:1px solid var(--line-2); border-radius:4px; padding:20px; background:var(--surf); display:flex; flex-direction:column; gap:10px}
+.dn .lab{font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:500; letter-spacing:.14em; text-transform:uppercase}
+.dn .yes{border-left:2px solid var(--good)} .dn .yes .lab{color:var(--good)}
+.dn .nay{border-left:2px solid var(--crit)} .dn .nay .lab{color:var(--crit)}
+
+ul.plain{margin:0; padding-left:19px; color:var(--tx-2); font-size:15px; line-height:1.6}
+ul.plain li{margin-bottom:7px} ul.plain b{color:var(--tx); font-weight:700}
+ol.plain{margin:0; padding-left:20px; color:var(--tx-2); font-size:15px; line-height:1.6}
+ol.plain li{margin-bottom:9px} ol.plain b{color:var(--tx); font-weight:700}
+.legend{display:flex; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--tx-2)}
+.legend span{display:flex; align-items:center; gap:7px}
+.legend i{width:10px; height:10px; border-radius:2px}
+</style>
+
+<div class="wrap">
+
+<div class="cover">
+  <div class="stack g24">
+    <span class="tag">Брендбук цифрового продукта · внутри обоих брендов</span>
+    <h1>Паспорт</h1>
+    <p class="body col" style="font-size:19px; line-height:1.55">Не вывеска и не третий бренд. Инструмент: скан, карта клиентки, планшет мастера, экран в приложении. Тот самый инструмент, отсутствие которого делает перевод в косметологию невоспроизводимым.</p>
+  </div>
+  <div class="hair"></div>
+  <div class="grid3">
+    <div class="stack g8"><span class="tag">Зачем</span><p class="small">Проверка по 79 мастерам: разброс конверсии неотличим от случайного шума. Дело не в людях — у мастера нет инструмента.</p></div>
+    <div class="stack g8"><span class="tag">На чём стоит</span><p class="small">Механизм <code>custom_fields</code> уже развёрнут в 104–107 филиалах из 108. Поля есть, они просто пустые.</p></div>
+    <div class="stack g8"><span class="tag">Где живёт</span><p class="small">Планшет мастера в кабинете и мини-апп клиентки. Внутри «Подружек» и внутри MAIER, со своей ролью в каждом.</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="sec-head"><span class="sec-n">01</span><div class="stack g12"><h2>Роль в системе</h2></div></div>
+  <div class="stack g24">
+    <p class="body col">«Паспорт» — слой, а не бренд-конкурент. У него нет вывески, нет собственного фирменного цвета и нет права спорить с хозяином экрана. Когда он открыт внутри «Подружек», хром окрашен в петроль; внутри MAIER — в хвою. Свой у продукта только один вид цвета — тот, которым он показывает измерения.</p>
+
+    <div class="grid3">
+      <div class="panel stack g12">
+        <h4>Что он решает для клиентки</h4>
+        <p class="small">Отвечает на вопрос «где я нахожусь». Номер сессии в курсе, дата следующей, что изменилось с прошлого раза. Сегодня в промежутке между визитами она не видит ничего.</p>
+      </div>
+      <div class="panel stack g12">
+        <h4>Что он решает для мастера</h4>
+        <p class="small">Даёт основание для разговора. Не «вам бы к косметологу», а конкретная зона, конкретное измерение и конкретный следующий шаг. Консультация есть у 2,9% когорты, и 39% консультаций не дают ничего.</p>
+      </div>
+      <div class="panel stack g12">
+        <h4>Что он решает для сети</h4>
+        <p class="small">Наполняет карточку. Сегодня в ней нет пола, возраста, фототипа, показаний и противопоказаний — 14 полей, ни одного медицинского.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="t">Момент, ради которого продукт существует</span>
+      <p class="small">61,9% переходов в косметологию происходит на <b>втором визите</b>, медиана — 24-й день, то есть в паузе между сессиями эпиляции. В самом визите продаётся только 9,4%. Значит продукт должен работать не у кушетки, а в промежутке: в кармане у клиентки и в истории у мастера. Всё остальное в этом брендбуке подчинено этой одной задаче.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">02</span><div class="stack g12"><h2>Имя</h2><p class="body col">«Паспорт кожи» использовать нельзя — формулировка защищена чужим патентом. Ниже рабочие варианты, все требуют проверки по базе ФИПС до запуска.</p></div></div>
+  <div class="stack g16">
+    <div class="tw">
+      <table>
+        <thead><tr><th>Вариант</th><th>Что обещает</th><th>Риск</th></tr></thead>
+        <tbody>
+          <tr><td><b>Карта</b></td><td>Медицинская карта и карта местности одновременно. Короткое, русское, ложится и на планшет, и в разговор мастера.</td><td>Слово общеупотребительное — как товарный знак защищается слабо, нужна связка со вторым словом.</td></tr>
+          <tr><td><b>Маршрут</b></td><td>Последовательность и движение. Хорошо сочетается с курсом MAIER: маршрут состоит из этапов.</td><td>Ассоциация с навигацией, а не с телом.</td></tr>
+          <tr><td><b>Протокол</b></td><td>Клиническая строгость, воспроизводимость. Самое «врачебное» из четырёх.</td><td>Холодное. Для массового бренда «Подружки» будет чужим.</td></tr>
+          <tr><td><b>Паспорт</b> <span class="tiny">(рекомендуется)</span></td><td>Сохраняет замысел владельца и снимает патентный конфликт: защищена связка «паспорт кожи», а не слово. Понятно без объяснения.</td><td>Обязательна проверка по 44 и 42 классам МКТУ и отказ от формулировки «паспорт кожи» во всех материалах.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small col">Во всех текстах продукт называется одним словом — «Паспорт». Сочетания «паспорт кожи», «паспорт красоты» и «паспорт здоровья» не используются: первое защищено, второе и третье не проверены.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">03</span><div class="stack g12"><h2>Знак</h2></div></div>
+  <div class="stack g24">
+    <div class="grid2">
+      <div class="stage">
+        <div class="mk">
+          <svg width="34" height="34" viewBox="0 0 34 34" role="img" aria-label="Знак продукта Паспорт">
+            <rect x="1" y="1" width="32" height="32" rx="6" fill="none" stroke="currentColor" stroke-width="1.6" style="color:var(--tx-3)"/>
+            <path d="M7 22 L12 22 L15 12 L19 26 L22 18 L27 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sig)"/>
+          </svg>
+          <span class="nm">Паспорт<span class="sub">Карта клиентки</span></span>
+        </div>
+      </div>
+      <div class="panel stack g12">
+        <h4>Логика знака</h4>
+        <p class="small">Кадр и линия внутри. Кадр — область измерения, линия — сам показатель во времени. Знак читается на 16 px, работает как иконка приложения, не требует цвета и не конфликтует ни с петролем, ни с хвоёй.</p>
+        <p class="small">Единственный обязательный элемент — линия. Кадр может опускаться, когда знак ставится в интерфейсе рядом с логотипом клиники.</p>
+      </div>
+    </div>
+    <div class="note">
+      <span class="t">Как знак ведёт себя рядом с брендом-хозяином</span>
+      <p class="small">Всегда меньше и всегда после. В «Подружках» — «Подружки · Паспорт», в клинике — «MAIER · Паспорт». Продукт никогда не ставится первым и никогда не набирается тем же кеглем: это модуль, а не соучредитель.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">04</span><div class="stack g12"><h2>Цвет</h2><p class="body col">У продукта нет декоративного цвета. Есть только цвет данных — и это решение, а не аскетизм.</p></div></div>
+  <div class="stack g32">
+
+    <div class="stack g16">
+      <h3>Поверхности и текст</h3>
+      <div class="pal">
+        <div class="chip"><i style="background:#0D1014"></i><div class="meta"><span class="nm">Фон, тёмная</span><span class="hx">#0D1014</span><span class="use">Основной режим. Планшет работает в кабинете с приглушённым светом.</span></div></div>
+        <div class="chip"><i style="background:#161B20"></i><div class="meta"><span class="nm">Панель</span><span class="hx">#161B20</span><span class="use">Карточки, поля, панели.</span></div></div>
+        <div class="chip"><i style="background:#E8EDEF"></i><div class="meta"><span class="nm">Свет</span><span class="hx">#E8EDEF</span><span class="use">Текст и действие. Единственный «фирменный» цвет продукта.</span></div></div>
+        <div class="chip"><i style="background:#F7F8F8"></i><div class="meta"><span class="nm">Фон, светлая</span><span class="hx">#F7F8F8</span><span class="use">Режим для распечатки и для мини-аппа днём.</span></div></div>
+      </div>
+      <p class="small col">Действие в интерфейсе никогда не окрашено в цвет данных. Кнопка — это «Свет» на тёмном или «Тушь» на светлом. Так цвет остаётся значащим: если что-то янтарное, это меланин, а не «важная кнопка».</p>
+    </div>
+
+    <div class="stack g16">
+      <h3>Каналы измерения</h3>
+      <p class="small col">Три величины, которые продукт показывает всегда и в одном и том же порядке. Порядок закреплён: цвет следует за величиной, а не за её местом в списке. Если гидратацию не измеряли, её слот остаётся пустым — цвета не сдвигаются.</p>
+      <div class="pal">
+        <div class="chip"><i style="background:#B08D2C"></i><div class="meta"><span class="nm">Меланин</span><span class="hx">#B08D2C</span><span class="use">Пигментация, фототип, риск гиперпигментации.</span></div></div>
+        <div class="chip"><i style="background:#C2456F"></i><div class="meta"><span class="nm">Гемоглобин</span><span class="hx">#C2456F</span><span class="use">Сосудистый компонент, покраснение, реактивность.</span></div></div>
+        <div class="chip"><i style="background:#2E9FBA"></i><div class="meta"><span class="nm">Гидратация</span><span class="hx">#2E9FBA</span><span class="use">Барьер, увлажнённость, восстановление после процедуры.</span></div></div>
+      </div>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Проверка</th><th>Тёмная тема</th><th>Светлая тема</th><th>Результат</th></tr></thead>
+          <tbody>
+            <tr><td>Полоса светлоты OKLCH</td><td class="n">внутри 0,48–0,67</td><td class="n">внутри 0,43–0,77</td><td class="pass">пройдено</td></tr>
+            <tr><td>Минимум цветности</td><td class="n">все ≥ 0,10</td><td class="n">все ≥ 0,10</td><td class="pass">пройдено</td></tr>
+            <tr><td>Различимость при дальтонизме</td><td class="n">ΔE 11,3 (дейтан)</td><td class="n">ΔE 11,3 (дейтан)</td><td class="pass">пройдено</td></tr>
+            <tr><td>Различимость при обычном зрении</td><td class="n">ΔE 20,2</td><td class="n">ΔE 20,2</td><td class="pass">пройдено</td></tr>
+            <tr><td>Контраст к поверхности</td><td class="n">все ≥ 3:1</td><td class="n">все ≥ 3:1</td><td class="pass">пройдено</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tiny col">Проверено по всем парам, а не только соседним. Один и тот же набор проходит обе темы — поэтому цвет канала не меняется при переключении режима, и клиентка, открывшая приложение днём и вечером, видит одну и ту же величину одним цветом.</p>
+    </div>
+
+    <div class="stack g16">
+      <h3>Служебные состояния</h3>
+      <p class="small col">Отдельная палитра, которая никогда не используется как четвёртый канал данных. Всегда сопровождается словом и знаком, не цветом в одиночку.</p>
+      <div class="pal">
+        <div class="chip"><i style="background:#2E7D5B"></i><div class="meta"><span class="nm">В норме</span><span class="hx">#2E7D5B</span><span class="use">Показатель в пределах ожидаемого.</span></div></div>
+        <div class="chip"><i style="background:#9A6B12"></i><div class="meta"><span class="nm">Внимание</span><span class="hx">#9A6B12</span><span class="use">Требует обсуждения с мастером.</span></div></div>
+        <div class="chip"><i style="background:#A83A32"></i><div class="meta"><span class="nm">Противопоказание</span><span class="hx">#A83A32</span><span class="use">Процедура не проводится. Блокирует запись.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">05</span><div class="stack g12"><h2>Типографика</h2></div></div>
+  <div class="stack g24">
+    <div class="grid3">
+      <div class="panel stack g12">
+        <h4>Unbounded · 600 / 700</h4>
+        <p style="font-family:Unbounded,sans-serif; font-weight:700; font-size:26px; line-height:1.1; letter-spacing:-.02em">Аа Бб Вв 128</p>
+        <p class="small">Только имя продукта и крупные значения измерений. Больше нигде — шрифт слишком характерный, чтобы им набирать текст.</p>
+      </div>
+      <div class="panel stack g12">
+        <h4>Onest · 400 / 500 / 700</h4>
+        <p style="font-size:19px; line-height:1.35">Аа Бб Вв Гг Дд Ее Жж</p>
+        <p class="small">Весь интерфейс и весь текст. Родная кириллица, узкие цифры, хорошо держит мелкие кегли на планшете.</p>
+      </div>
+      <div class="panel stack g12">
+        <h4>JetBrains Mono · 400 / 500</h4>
+        <p class="mono" style="font-size:17px; line-height:1.35">12.08.26 · 34,2 · ID-4471</p>
+        <p class="small">Даты, идентификаторы, измерения в таблицах, метки разделов. Всё, что должно выстраиваться в колонку.</p>
+      </div>
+    </div>
+    <div class="note">
+      <span class="t">Правило для чисел</span>
+      <p class="small">Измерение всегда набирается Unbounded, если оно главное на экране, и JetBrains Mono, если оно в ряду с другими. Смешивать в одном блоке нельзя. Единица измерения — всегда на 40% мельче числа и цветом <code>--tx-3</code>: величина важнее единицы.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">06</span><div class="stack g12"><h2>Показания</h2><p class="body col">Как выглядит измерение. Это главный компонент продукта — из него собраны оба экрана.</p></div></div>
+  <div class="stack g24">
+    <div class="legend">
+      <span><i style="background:#B08D2C"></i>Меланин</span>
+      <span><i style="background:#C2456F"></i>Гемоглобин</span>
+      <span><i style="background:#2E9FBA"></i>Гидратация</span>
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <span class="lab"><i style="background:#B08D2C"></i>Меланин</span>
+        <span class="v">62<span style="font-size:.4em; color:var(--tx-3); font-weight:500"> усл.</span></span>
+        <div class="track"><i style="background:#B08D2C; width:62%"></i></div>
+        <span class="note">Выше среднего для фототипа II. Загар противопоказан за 2 недели до сессии.</span>
+      </div>
+      <div class="tile">
+        <span class="lab"><i style="background:#C2456F"></i>Гемоглобин</span>
+        <span class="v">38<span style="font-size:.4em; color:var(--tx-3); font-weight:500"> усл.</span></span>
+        <div class="track"><i style="background:#C2456F; width:38%"></i></div>
+        <span class="note">В норме. Реактивность низкая, ограничений нет.</span>
+      </div>
+      <div class="tile">
+        <span class="lab"><i style="background:#2E9FBA"></i>Гидратация</span>
+        <span class="v">44<span style="font-size:.4em; color:var(--tx-3); font-weight:500"> усл.</span></span>
+        <div class="track"><i style="background:#2E9FBA; width:44%"></i></div>
+        <span class="note">Ниже нормы. Барьер восстанавливается 10–14 дней после процедуры.</span>
+      </div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Канал</th><th>Значение</th><th>Норма</th><th>Изменение за 3 месяца</th><th>Состояние</th></tr></thead>
+        <tbody>
+          <tr><td>Меланин</td><td class="n">62</td><td class="n">30–55</td><td class="n">+7</td><td>Внимание</td></tr>
+          <tr><td>Гемоглобин</td><td class="n">38</td><td class="n">25–50</td><td class="n">−3</td><td>В норме</td></tr>
+          <tr><td>Гидратация</td><td class="n">44</td><td class="n">50–75</td><td class="n">+11</td><td>Внимание</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny col">Табличное представление обязательно на каждом экране с показаниями — оно доступно скринридеру и не зависит от цвета. Значение всегда сопровождается нормой: число без диапазона ничего не сообщает клиентке.</p>
+
+    <div class="dn">
+      <div class="yes">
+        <span class="lab">Так показываем</span>
+        <ul class="plain">
+          <li>Значение, норма, изменение — рядом.</li>
+          <li>Одна величина — один цвет, всегда один и тот же.</li>
+          <li>Состояние — словом и цветом, не цветом одним.</li>
+          <li>Полоса заполнения тонкая, дорожка видна.</li>
+        </ul>
+      </div>
+      <div class="nay">
+        <span class="lab">Так не показываем</span>
+        <ul class="plain">
+          <li>Круговые шкалы и «спидометры» — площадь читается хуже длины.</li>
+          <li>Оценку в баллах «здоровье кожи 7/10» — это не измерение, а суждение.</li>
+          <li>Две оси на одном графике.</li>
+          <li>Радар-диаграммы: площадь фигуры зависит от порядка осей.</li>
+          <li>Проценты без базы, к которой они посчитаны.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">07</span><div class="stack g12"><h2>Экран мастера</h2><p class="body col">Планшет в кабинете. Открывается за один тап, заполняется в четыре — иначе им не будут пользоваться.</p></div></div>
+  <div class="stack g24">
+    <div class="grid2">
+      <div class="screen">
+        <div class="top"><span class="t">Приём · 14 авг</span><span class="t mono">ID 4471</span></div>
+        <div class="in">
+          <div class="stack g8">
+            <span class="tag">Клиентка</span>
+            <h3 style="font-family:Unbounded,sans-serif; font-weight:600; font-size:20px">Анна К. · 34</h3>
+            <p class="tiny">Визит 2 из курса · фототип II · прошлый визит 21 июля</p>
+          </div>
+          <div class="field">
+            <span class="l">Фототип по Фицпатрику</span>
+            <div class="chips"><span>I</span><span class="on">II</span><span>III</span><span>IV</span><span>V</span><span>VI</span></div>
+          </div>
+          <div class="field">
+            <span class="l">Отметьте, что есть сейчас</span>
+            <div class="chips"><span class="on">Пигментные пятна</span><span>Сосудистая сетка</span><span class="on">Сухость</span><span>Высыпания</span><span>Рубцы</span></div>
+          </div>
+          <div class="field">
+            <span class="l">Противопоказания</span>
+            <div class="b">Беременность — нет · Загар за 14 дней — нет · Приём ретиноидов — да</div>
+          </div>
+          <span class="btn">Сохранить и предложить шаг</span>
+        </div>
+      </div>
+      <div class="stack g16">
+        <div class="panel stack g12">
+          <h4>Правила экрана мастера</h4>
+          <ul class="plain">
+            <li>Ни одного свободного текстового поля в обязательной части. Только выбор — иначе поля останутся пустыми, как <code>custom_fields</code> сегодня.</li>
+            <li>Максимум четыре касания до сохранения.</li>
+            <li>Область нажатия — не меньше 44 × 44 px: мастер работает в перчатках.</li>
+            <li>Ничего, что требует набора текста во время процедуры.</li>
+            <li>Следующий шаг предлагает система, а не мастер. У мастера — право отклонить.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <span class="t">Почему предложение формирует система</span>
+          <p class="small">Потому что сегодня перевод невоспроизводим: разброс между 79 мастерами статистически неотличим от случайного. Если решение остаётся личным навыком, оно останется случайным. Система предлагает шаг по данным, мастер объясняет — это разделение и есть продукт.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">08</span><div class="stack g12"><h2>Экран клиентки</h2><p class="body col">Мини-апп. Работает в паузе между визитами — там, где принимается 61,9% решений.</p></div></div>
+  <div class="stack g24">
+    <div class="grid2">
+      <div class="screen">
+        <div class="top"><span class="t">Мой паспорт</span><span class="t mono">Обновлён 14.08</span></div>
+        <div class="in">
+          <div class="stack g8">
+            <span class="tag">Следующая сессия</span>
+            <h3 style="font-family:Unbounded,sans-serif; font-weight:600; font-size:22px; line-height:1.2">25 сентября, 14:30</h3>
+            <p class="tiny">Третья из восьми · Кутузовский · за 2 недели не загорать</p>
+          </div>
+          <div>
+            <div class="zone-row"><span class="z">Голени<small>Сессия 2 из 8 · следующая 25 сентября</small></span><span class="pill b">По плану</span></div>
+            <div class="zone-row"><span class="z">Подмышечные впадины<small>Сессия 2 из 6 · следующая 25 сентября</small></span><span class="pill b">По плану</span></div>
+            <div class="zone-row"><span class="z">Пигментация на скулах<small>Отмечено мастером 14 августа</small></span><span class="pill w">Не в работе</span></div>
+          </div>
+          <span class="btn">Что можно сделать с пигментацией</span>
+        </div>
+      </div>
+      <div class="stack g16">
+        <div class="panel stack g12">
+          <h4>Правила экрана клиентки</h4>
+          <ul class="plain">
+            <li>Первым экраном — где я нахожусь, а не что купить.</li>
+            <li>Номер сессии в курсе виден всегда. Это самый дешёвый рычаг на второй визит.</li>
+            <li>Найденное мастером не превращается в рекламу автоматически: оно висит как «не в работе», пока клиентка сама не откроет.</li>
+            <li>Ни одного бейджа скидки, ни одного таймера обратного отсчёта.</li>
+            <li>Цена следующего шага видна до записи.</li>
+          </ul>
+        </div>
+        <div class="note crit">
+          <span class="t">Красная линия продукта</span>
+          <p class="small">«Паспорт» не ставит диагнозов и не обещает результат. Он показывает измерения, отмеченное мастером и план. Формулировки «у вас купероз», «это фотостарение», «уйдёт за 3 процедуры» в интерфейсе запрещены — их произносит врач, и он же несёт за них ответственность.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-n">09</span><div class="stack g12"><h2>Данные</h2><p class="body col">Минимальный набор, который надо начать собирать. Всё это ложится в уже развёрнутый механизм <code>custom_fields</code>.</p></div></div>
+  <div class="stack g16">
+    <div class="tw">
+      <table>
+        <thead><tr><th>Поле</th><th>Кто заполняет</th><th>Зачем</th></tr></thead>
+        <tbody>
+          <tr><td>Фототип по Фицпатрику</td><td>Мастер, один раз</td><td>Определяет параметры аппарата и риск гиперпигментации. Сегодня не хранится нигде.</td></tr>
+          <tr><td>Дата рождения</td><td>Администратор при записи</td><td>Возрастные противопоказания и сегментация. В карточке отсутствует.</td></tr>
+          <tr><td>Зона и номер сессии</td><td>Система, автоматически</td><td>Ядро продукта. Позволяет показать «2 из 8» вместо «вы были 21 июля».</td></tr>
+          <tr><td>Отмеченное на осмотре</td><td>Мастер, выбором из списка</td><td>Основание для следующего шага. Заменяет свободный комментарий, который сегодня заполняется у 1,17% людей и только при отмене.</td></tr>
+          <tr><td>Противопоказания</td><td>Мастер, чек-лист</td><td>Блокирует запись на несовместимую процедуру. Юридически обязательно.</td></tr>
+          <tr><td>Согласия</td><td>Клиентка, подпись в приложении</td><td>Обработка данных, фото, рассылка. Сегодня согласий в карточке нет вообще.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="t">Порядок внедрения</span>
+      <p class="small">Сначала фототип, зона и номер сессии — три поля, которые дают продукту смысл и заполняются без обучения. Медицинская часть подключается только в пяти клиниках ядра, где есть врач. В моно-филиалах «Паспорт» работает как счётчик курса, и этого достаточно: половина эффекта — в том, чтобы клиентка видела, что курс не закончился.</p>
+    </div>
+  </div>
+</section>
+
+<section style="border-bottom:0">
+  <div class="sec-head"><span class="sec-n">10</span><div class="stack g12"><h2>Право и этика</h2></div></div>
+  <div class="stack g16">
+    <ul class="plain col">
+      <li><b>Данные о коже — медицинские.</b> Их обработка требует отдельного согласия, а не галочки в общей оферте. Согласие подписывается в приложении и хранится с датой и версией текста.</li>
+      <li><b>Фото — только с явного разрешения и по назначению.</b> Снимок для сравнения динамики и снимок для публикации — разные согласия. Смешивать их в одно нельзя.</li>
+      <li><b>Никаких диагнозов в интерфейсе.</b> Продукт показывает измерения и отметки, а не заключения.</li>
+      <li><b>Отказ обратим.</b> Клиентка может отозвать согласие и удалить измерения, сохранив историю записей. Кнопка — в профиле, не в переписке с поддержкой.</li>
+      <li><b>Дисклеймер на любом экране с рекомендацией:</b> «Есть противопоказания, необходима консультация специалиста».</li>
+      <li><b>Данные не используются для скидочных рассылок.</b> Отмеченная мастером проблема не может стать поводом для push-уведомления с акцией. Это разрушит доверие к инструменту быстрее, чем он успеет принести деньги.</li>
+    </ul>
+    <p class="tiny col">Раздел — ориентир для продуктовой команды, а не юридическое заключение. Формулировки согласий готовит юрист сети.</p>
+  </div>
+</section>
+
+</div>
